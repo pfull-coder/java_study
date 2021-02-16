@@ -1,10 +1,8 @@
-package day10.inherit.player;
+package day11.poly.player;
 
 // 부모 클래스(super class)
 // 상속을 사용하지 않으면 자동으로 Object를 상속함.
 public class Player {
-
-
 
     String name;
     int level;
@@ -13,7 +11,7 @@ public class Player {
     public Player() {}
 
     public Player(String name, int level, int hp) {
-        System.out.println("Player 객체 생성!");
+//        System.out.println("Player 객체 생성!");
         this.name = name;
         this.level = level;
         this.hp = hp;
