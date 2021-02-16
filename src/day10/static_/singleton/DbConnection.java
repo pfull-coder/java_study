@@ -25,8 +25,7 @@ public class DbConnection {
         3. 외부에서 이 클래스의 객체생성을 요구할 경우, 2번에서
            미리 만들어둔 단 하나의 객체를 메서드를 통해 반환함.
     */
-    public DbConnection getConnection() {
+    public static DbConnection getConnection() {
         return conn;
     }
-
 }
