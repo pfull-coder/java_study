@@ -29,17 +29,22 @@ public class Main {
 
         Object[] oArr = {100, "44", 2.5, true, new Car(), new K5(), cars};
 
-        System.out.println("=====================================");
+        System.out.println("================================");
 
         Driver kim = new Driver();
         kim.drive(s2);
 
-        System.out.println("=====================================");
+        System.out.println("================================");
 
         Car newCar = kim.buyCar("소나타");
 //        Sonata newCar = (Sonata)kim.buyCar("소나타")   -> 다운캐스팅
         kim.drive(newCar);
 //        ((Sonata)newCar).joinMembership();  -> 자식타입으로 강제 타입변환
+
+        System.out.println("================================");
+        CarShop shop = new CarShop();
+        int money = shop.sellCar(new Sonata());
+        System.out.println("차 판매 수령액: " + money);
 
 
 
