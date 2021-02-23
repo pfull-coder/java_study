@@ -1,6 +1,9 @@
 package day15.api.util.list;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListExample {
@@ -82,5 +85,22 @@ public class ListExample {
 
         List objList = new ArrayList(); //Object 리스트
 
+        // 초기값들이 들어있는 리스트 생성법
+//        List<Integer> numberList = Arrays.asList(50,60,30,120,80);
+        List<Integer> numberList = new ArrayList<>(
+                Arrays.asList(50,60,30,120,80)
+        );
+        System.out.println("========================================");
+
+        numberList.add(100);
+        System.out.println("numberList = " + numberList);
+
+        // 오름차 정렬
+        numberList.sort(Integer::compareTo);
+        System.out.println("numberList = " + numberList);
+
+        // 내림차 정렬
+        numberList.sort(Comparator.reverseOrder());
+        System.out.println("numberList = " + numberList);
     }
 }
