@@ -45,7 +45,7 @@ public class MainClass {
     }
 
     public static void showMenu() {
-        System.out.println("\n\n\n*** 음악 관리 프로그램 ***");
+        System.out.println("\n*** 음악 관리 프로그램 ***");
         System.out.printf("# [현재 등록된 가수: %d명]\n", artists.size());
         System.out.println("# 1. 노래 등록하기");
         System.out.println("# 2. 노래 정보 검색");
@@ -76,9 +76,6 @@ public class MainClass {
         System.out.print("- 곡명: ");
         String song = sc.nextLine();
 
-        if(artists.containsKey(artist)){
-            System.out.printf("# 아티스트 %s님이 신규등록되었습니다.", artist);
-        }
 		/*
 		 1. 가수명이 중복되었는지 확인 후 신규 가수 등록이라면
 		 "# 아티스트 xxx님이 신규등록되었습니다."를 출력 후 해당 곡명과 함께
@@ -90,6 +87,25 @@ public class MainClass {
 		 "# 이미 등록된 노래입니다."를 출력하세요.
 		 */
 
+        // 신규 아티스트의 노래 set을 생성
+
+        // 신규 아티스트 판단 조건
+        if (!artists.containsKey((artist))) {
+            songs = new HashSet<>();
+            songs.add(song);
+            artists.put(artist, songs);
+            System.out.printf("# 아티스트 %s님이 신규 등록되었습니다.\n", artist);
+
+            // 기존 아티스트 등록
+        } else {
+            Set<String> songList = artists.get(artist);
+            if(songList.add(song)) {
+                System.out.printf("# 아티스트 %s님의 노래목록에 '%s'이(가) 추가되었습니다.\n"
+                        , artist, song);
+            } else {
+                System.out.println("# 이미 등록된 노래입니다.");
+            }
+        }
         saveData();
     }
 
@@ -106,8 +122,17 @@ public class MainClass {
 		      [abc, def, ghi, jkl ...]
 		 2. 등록된 가수가 아니라면 "해당 아티스트는 등록되지 않았습니다."를 출력.
 		 */
-
-
+        if (artists.containsKey(artist)) {
+            System.out.printf("\n# %s님의 노래목록 # \n", artist);
+            System.out.println("====================================");
+            int number = 1;
+            for (String song : artists.get(artist)) {
+                System.out.printf("* %d. %s", number, song);
+                number++;
+            }
+        } else {
+            System.out.println("# 해당 아티스트는 등록되지 않았습니다.");
+        }
     }
 
     //입력된 노래데이터를 저장하는 메서드.
@@ -152,7 +177,7 @@ public class MainClass {
             fis = new FileInputStream(fileName);
             ois = new ObjectInputStream(fis);
 
-            //readObject는 파일에저장된 객체를 Object타입으로 리턴한다.
+            //readObject는 파일에 저장된 객체를 Object타입으로 리턴한다.
             artists = (Map<String, Set<String>>) ois.readObject();
 
         } catch (Exception e) {
